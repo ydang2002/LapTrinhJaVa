@@ -1,9 +1,11 @@
 package Bai7Den10;
 
+import java.util.Scanner;
+
 public class Date {
-	public int day;
-	public int month;
-	public int year;
+	private int day;
+	private int month;
+	private int year;
 	
 	public Date() {
 		
@@ -15,11 +17,11 @@ public class Date {
 		this.year = year;
 	}
 	
-	public void setDate(int day, int month, int year) {
+	/*public void setDate(int day, int month, int year) {
 		this.day = day;
 		this.month = month;
 		this.year = year;
-	}
+	}*/
 	
 	public void setDay(int day) {
 		this.day = day;
@@ -48,5 +50,22 @@ public class Date {
 	public int compareTo(Date date) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public void nhapNgayThangNam(Scanner sc) {
+		
+		System.out.println("Nhap ngay: ");
+		day = sc.nextInt();
+		System.out.println("Nhap thang: ");
+		month = sc.nextInt();
+		System.out.println("Nhap nam: ");
+		year = sc.nextInt();	
+		
+	}
+	
+	
+	
+	public void xuatNgay(Date date) {
+		System.out.println(date.day + "/" + date.month + "/" + date.year);
 	}
 }

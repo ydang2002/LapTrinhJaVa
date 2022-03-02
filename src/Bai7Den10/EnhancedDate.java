@@ -1,4 +1,11 @@
 package Bai7Den10;
+
+import java.time.Year;
+import java.util.Scanner;
+import java.util.Vector;
+
+
+
 /*link tham khao: https://www.howkteam.vn/course/viet-chuong-trinh-so-sanh-2-thoi-gian-nhap-vao-va-in-ra-ket-qua/tim-ngay-truoc-va-sau-cua-mot-ngay-1306*/
 public class EnhancedDate extends Date{
 	public EnhancedDate() {
@@ -8,6 +15,43 @@ public class EnhancedDate extends Date{
 	public EnhancedDate(int day, int month, int year) {
 		super(day, month, year);
 	}
+	public int n = 0;
+	private Vector<Date> danhSachNgay = new Vector<Date>(n);
+	
+	/*public void QuanLiDanhSachNgay() {
+		danhSachNgay = new Vector<Date>(n);
+	}*/
+	
+	// them ngay vao danh sach
+	public void themNgay(Date date) {
+		danhSachNgay.add(date);
+	}
+	
+	//ham nhap danh sach ngay
+	public void nhapDanhSachNgay(Scanner sc) {
+		Date date = new Date();
+		
+		System.out.print("Nhap so luong ngay nhap vao:");
+		 n = sc.nextInt();
+		
+		System.out.println("Nhap danh sach ngay: ");
+		for(int i = 0; i < n; i++ ) {
+			System.out.println("Nhap ngay thu " + (i + 1) + " la:");
+			try {
+				date.nhapNgayThangNam(sc);
+			
+			} catch(Exception ex) {
+				System.out.println("Loi: Ngay phai la so nguyen " );
+			}
+			
+			
+			//bat ngoai le ngay khong hoop le
+			//nemNgoaiLe(getDay(), getMonth(), getYear());
+			
+			themNgay(date);
+		}
+	}
+	
 	// ham kiem tra co phai nam nhuan k
 	public boolean isLeapYear(int year) {
 		if(((year % 4 == 0) && (year % 100 != 0)) ||(year % 400 == 0)){
@@ -97,7 +141,56 @@ public class EnhancedDate extends Date{
 		
 	}
 	
-	public void nhapNgayThangNam() {
+	//Bài 9 
+	public void nemNgoaiLe(int day, int month, int year) {
+		if(isValidDate(day, month, year) == false) {
+			throw new IllegalArgumentException("Ngay khong hop le");
+		}
+	}
+	
+	public void xuatNgayNamNhuan() {
+	
+		for(Date date : danhSachNgay) {
+			if(isLeapYear(getYear())) {
+				date.xuatNgay(date);
+			}
+		}
 		
+	}
+	
+	public void ngayLienTruoc() {
+		
+		for(Date date : danhSachNgay) {
+			System.out.println("Ngay lien truoc: ");
+			date.xuatNgay(date);
+			System.out.println("la: ");
+			prevDay(getDay(), getMonth(), getYear());
+			date.xuatNgay(date);
+		}
+		
+	}
+	
+	public void ngayNhoNhatLonNhat() {
+		for(Date date : danhSachNgay) {
+			if(compareTo(date)==-1) {
+				System.out.println("ngay nho nhat:");
+				date.xuatNgay(date);
+			}
+			if(compareTo(date)==1) {
+				System.out.println("ngay lon nhat:");
+				date.xuatNgay(date);
+			}
+		}
+	}
+	
+	@Override 
+	public void nhapNgayThangNam(Scanner sc) {
+		super.nhapNgayThangNam(sc);
+	}
+	
+	public void xuatDanhSach() {
+		for(Date date : danhSachNgay) {
+			date.xuatNgay(date);
+		}
 	}
 }/*https://helpex.vn/question/lam-the-nao-de-so-sanh-ngay-trong-java-ban-sao-5cb1674dae03f6169c9e680e*/

@@ -1,31 +1,92 @@
 package Bai7Den10;
 
 import java.util.Scanner;
-import java.util.Vector;
+
+
+
+/*public class QuanLiDanhSachNgay{
+	
+	private Vector<Date> danhSachNgay;
+	public QuanLiDanhSachNgay() {
+		
+		danhSachNgay = new Vector<Date>();
+	}
+	
+	public void themNgay(Date date) {
+		danhSachNgay.add()
+	}
+}*/
 
 public class Main {
 	static Scanner sc = new Scanner(System.in);
-	public void nhapNgayThangNam() {
-		
-	}
+	
 	public static void main(String[] args) {
 		
 		EnhancedDate enhancedDate = new EnhancedDate();
-		int n;
-		Vector<Date> v = new Vector<Date>(n);
 		
-		System.out.println("nhap n doi tuong Date: ");
+		while(true) {
+			System.out.println("chon cac hinh thuc sau");
+			
+			System.out.println("1: Nhap danh sach n doi tuong Date");
+			System.out.println("2: Nhung ngay thuoc nam nhuan");
+			System.out.println("3: Ngay lien truoc va ngay lien sau");
+			System.out.println("4: Ngay lon nhat va ngay no nhat");
+			System.out.println("5: ");
+			System.out.println("6: ");
+			System.out.println("0: Thoat");
+			String luaChon = sc.nextLine();
+			switch(luaChon) {
+				case "1":{
+					enhancedDate.nhapDanhSachNgay(sc);
+					break;
+				}
+				case "2":{
+					enhancedDate.xuatNgayNamNhuan();
+					break;
+				}
+				case "3":{
+					Date date = new Date();
+					enhancedDate.ngayLienTruoc();
+					break;
+				}
+				case "4":{
+					enhancedDate.ngayNhoNhatLonNhat();
+					break;
+				}
+				case "5":{
+					
+					break;
+				}
+				case "6":{
+					
+					break;
+				}
+				case "0":{
+					return;
+				}
+					
+				default :
+				System.out.println("vui long chon dung hinh thuc");
+			}
+		}
+		
+		//int n = 0;
+		//Vector<Date> v = new Vector<Date>(n);
+		
+		
+		
+		/*System.out.println("nhap n doi tuong Date: ");
 		n = sc.nextInt();
 		
 		for(int i =0; i < n; i++) {
 			
 			try {
 				System.out.println("nhap ngay");
-				enhancedDate.day = sc.nextInt();
+				enhancedDate.setDay(sc.nextInt());
 				System.out.println("nhap thang");
-				enhancedDate.month = sc.nextInt();
+				enhancedDate.setMonth(sc.nextInt());
 				System.out.println("nhap nam");
-				enhancedDate.year = sc.nextInt();
+				enhancedDate.setYear(sc.nextInt());
 				
 			} catch(IllegalArgumentException ex) {
 				System.out.println("Loi: Nhap vao khong phai la so");
@@ -33,11 +94,10 @@ public class Main {
 				System.out.println("Loi: " + ex.getMessage());
 			}
 			
-			if(enhancedDate.isValidDate(enhancedDate.day, enhancedDate.month, enhancedDate.year)) {
-				System.out.println("ngay khong hop le");
-			}
-			v.add(i);
-		}
+			//enhancedDate.nemNgoaiLe(day, month, year);
+			
+			//v.add(i);
+		}*/
 		
 	}
 
