@@ -8,20 +8,34 @@ public class Date {
 	private int year;
 	
 	public Date() {
+		day = 1; month = 1; year = 2002;
+	}
+	
+	public Date(int day, int month, int year) throws IllegalArgumentException {
+		EnhancedDate d1 = new EnhancedDate();
+		d1.setDate(day, month, year);
+		if(!d1.isLeapYear()) {
+			this.day = 1; this.month = 1; this.year = 2002;
+			throw new IllegalArgumentException();
+		}
 		
-	}
-	
-	public Date(int day, int month, int year) {
 		this.day = day;
 		this.month = month;
 		this.year = year;
 	}
 	
-	/*public void setDate(int day, int month, int year) {
+	public void setDate(int day, int month, int year)throws IllegalArgumentException {
+		EnhancedDate d1 = new EnhancedDate();
+		d1.setDate(day, month, year);
+		if(!d1.isLeapYear()) {
+			this.day = 1; this.month = 1; this.year = 2002;
+			throw new IllegalArgumentException();
+		}
+		
 		this.day = day;
 		this.month = month;
 		this.year = year;
-	}*/
+	}
 	
 	public void setDay(int day) {
 		this.day = day;
@@ -52,7 +66,7 @@ public class Date {
 		return 0;
 	}
 	
-	public void nhapNgayThangNam(Scanner sc) {
+	/*public void nhapNgayThangNam(Scanner sc) {
 		
 		System.out.println("Nhap ngay: ");
 		day = sc.nextInt();
@@ -61,7 +75,7 @@ public class Date {
 		System.out.println("Nhap nam: ");
 		year = sc.nextInt();	
 		
-	}
+	}*/
 	
 	
 	

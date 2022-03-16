@@ -1,6 +1,5 @@
 package Bai7Den10;
 
-import java.time.Year;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -15,7 +14,7 @@ public class EnhancedDate extends Date{
 	public EnhancedDate(int day, int month, int year) {
 		super(day, month, year);
 	}
-	public int n = 0;
+	/*public int n = 0;
 	private Vector<Date> danhSachNgay = new Vector<Date>(n);
 	
 	/*public void QuanLiDanhSachNgay() {
@@ -23,7 +22,7 @@ public class EnhancedDate extends Date{
 	}*/
 	
 	// them ngay vao danh sach
-	public void themNgay(Date date) {
+	/*public void themNgay(Date date) {
 		danhSachNgay.add(date);
 	}
 	
@@ -50,20 +49,20 @@ public class EnhancedDate extends Date{
 			
 			themNgay(date);
 		}
-	}
+	}*/
 	
 	// ham kiem tra co phai nam nhuan k
-	public boolean isLeapYear(int year) {
-		if(((year % 4 == 0) && (year % 100 != 0)) ||(year % 400 == 0)){
+	public boolean isLeapYear() {
+		if(((getYear() % 4 == 0) && (getYear() % 100 != 0)) ||(getYear() % 400 == 0)){
 			return true;
 		}else return false;
 	}
 	
 	//ham tra ve so ngay trong thang nam cho truoc
-	public int tinhSoNgayTrongThang(int month, int year) {
+	public int tinhSoNgayTrongThang() {
 		int soNgay = 0;
 		
-		switch (month) {
+		switch (getMonth()) {
 		case 1:
 		case 3:
 		case 5:
@@ -80,7 +79,7 @@ public class EnhancedDate extends Date{
 			soNgay = 30;
 			break;
 		case 2:
-				if(isLeapYear(year)) {
+				if(isLeapYear()) {
 					soNgay = 29;
 				}else {
 					soNgay = 28;
@@ -91,22 +90,22 @@ public class EnhancedDate extends Date{
 	}
 	
 	//ham kiem tra ngay co hop le khong
-	public boolean isValidDate(int day, int month, int year) {
-		if(year < 0) {
+	public boolean isValidDate() {
+		if(getYear() < 0) {
 			return false;
 		}
 		
-		if(month < 1 || month > 12) {
+		if(getMonth() < 1 || getMonth() > 12) {
 			return false;
 		}
 		
-		if(day <1 || day > tinhSoNgayTrongThang(month, year)) {
+		if(getDay() <1 || getDay() > tinhSoNgayTrongThang()) {
 			return false;
 		}
 		return true;
 	}
 	
-	public void prevDay(int day, int month, int year) {
+	public Date prevDay(int day, int month, int year) {
 		day--;
 		if(day == 0) {
 			month--;
@@ -114,13 +113,14 @@ public class EnhancedDate extends Date{
 				month = 12;
 				year--;
 			}
-			day = tinhSoNgayTrongThang(month, year);
+			day = tinhSoNgayTrongThang();
 		}
+		return new Date(day, month, year) ;
 	}
 	
-	public void nextDay(int day, int month, int year) {
+	public Date nextDay(int day, int month, int year) {
 		day++;
-		if(day > tinhSoNgayTrongThang(month, year)) {
+		if(day > tinhSoNgayTrongThang()) {
 			day = 1;
 			month++;
 			if(month > 12) {
@@ -128,9 +128,10 @@ public class EnhancedDate extends Date{
 				year++;
 			}
 		}
+		return new Date(day, month, year);
 	}
 	/*https://mkyong.com/java/how-to-compare-dates-in-java/*/
-	public int compareTo(Date date1, Date date2) {
+	/*public int compareTo(Date date1, Date date2) {
 		int ketQua = date1.compareTo(date2);
 		if(ketQua == 0) { 
 			return 0;
@@ -139,19 +140,39 @@ public class EnhancedDate extends Date{
 		}
 		return -1;
 		
-	}
+	}*/
 	
-	//Bài 9 
-	public void nemNgoaiLe(int day, int month, int year) {
-		if(isValidDate(day, month, year) == false) {
-			throw new IllegalArgumentException("Ngay khong hop le");
+	public int compareTo(Date d) {
+		if(this.getYear() > d.getYear()) {
+			return 1;
+		}else if(this.getYear() < d.getYear()) {
+			return -1;
+		}else {
+			if(this.getMonth() > d.getMonth()) {
+				return 1;
+			}else if(this.getMonth() < d.getMonth()) {
+				return -1;
+			}else {
+				if(this.getDay() > d.getDay()) {
+					return 1;
+				}else if(this.getDay() < d.getDay()) {
+					return -1;
+				}return 0;
+			}
 		}
 	}
 	
-	public void xuatNgayNamNhuan() {
+	//Bài 9 
+	/*public void nemNgoaiLe(int day, int month, int year) {
+		if(isValidDate(day, month, year) == false) {
+			throw new IllegalArgumentException("Ngay khong hop le");
+		}
+	}*/
+	
+	/*public void xuatNgayNamNhuan() {
 	
 		for(Date date : danhSachNgay) {
-			if(isLeapYear(getYear())) {
+			if(isLeapYear()) {
 				date.xuatNgay(date);
 			}
 		}
@@ -168,29 +189,18 @@ public class EnhancedDate extends Date{
 			date.xuatNgay(date);
 		}
 		
-	}
+	}*/
 	
-	public void ngayNhoNhatLonNhat() {
-		for(Date date : danhSachNgay) {
-			if(compareTo(date)==-1) {
-				System.out.println("ngay nho nhat:");
-				date.xuatNgay(date);
-			}
-			if(compareTo(date)==1) {
-				System.out.println("ngay lon nhat:");
-				date.xuatNgay(date);
-			}
-		}
-	}
 	
-	@Override 
+	
+	/*@Override 
 	public void nhapNgayThangNam(Scanner sc) {
 		super.nhapNgayThangNam(sc);
-	}
+	}*/
 	
-	public void xuatDanhSach() {
+	/*public void xuatDanhSach() {
 		for(Date date : danhSachNgay) {
 			date.xuatNgay(date);
 		}
-	}
+	}*/
 }/*https://helpex.vn/question/lam-the-nao-de-so-sanh-ngay-trong-java-ban-sao-5cb1674dae03f6169c9e680e*/

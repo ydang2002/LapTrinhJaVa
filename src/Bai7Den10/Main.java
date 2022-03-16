@@ -1,6 +1,10 @@
 package Bai7Den10;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Vector;
 
 
 
@@ -21,8 +25,98 @@ public class Main {
 	static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
+		/*Vector<Date> listDate = new Vector<>();
+		Scanner sc = new Scanner(System.in);
 		
-		EnhancedDate enhancedDate = new EnhancedDate();
+		try {
+			System.out.print("Nhap so luong ngay nhap vao:");
+			 int n = sc.nextInt();
+			 for(int i = 0; i < n; i++ ) {
+					System.out.println("Nhap ngay thu " + (i + 1) + " la:");
+					
+					System.out.println("Nhap ngay: ");
+					int day = sc.nextInt();
+					System.out.println("Nhap thang: ");
+					int month = sc.nextInt();
+					System.out.println("Nhap nam: ");
+					int year = sc.nextInt();	
+					
+					EnhancedDate date = new EnhancedDate(day, month, year);
+					listDate.add(date);
+			 }
+		} catch (InputMismatchException e) {
+			System.out.println("nhap sai du lieu");
+		} catch (IllegalArgumentException e) {
+			System.out.println("Ngay khong hop le");
+		}*/
+		
+		Vector<Date> dateList = new Vector<>();
+        Scanner input = new Scanner(System.in);
+        System.out.println("Nhap so ngay:");
+        int n = input.nextInt();
+        for (int i = 0; i < n; i++) {
+            int d, m, y;
+            System.out.println("Moi nhap ngay: ");
+            d = input.nextInt();
+            System.out.println("Moi nhap thang: ");
+            m = input.nextInt();
+            System.out.println("Moi nhap nam: ");
+            y = input.nextInt();
+
+            try {
+                Date a = new EnhancedDate(d, m, y);
+                dateList.add(a);
+            } catch (NumberFormatException e) {
+                System.out.println("Ngay thang nam phai la so nguyen.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ngay nhap vao khong hop le.");
+            }
+        }
+
+		
+		for(Date date : dateList) {
+			EnhancedDate date1 = new EnhancedDate();
+			if(date1.isLeapYear()) {
+				date1.xuatNgay(date);
+			}
+		}
+		
+		for (int i = 0; i < dateList.size(); i++) {
+            ((EnhancedDate) dateList.get(i)).prevDay().xuatNgay();
+            ((EnhancedDate) dateList.get(i)).nextDay().display();
+        }
+
+        EnhancedDate min = ((EnhancedDate) dateList.get(0));
+        EnhancedDate max = ((EnhancedDate) dateList.get(0));
+
+        for (int i = 0; i < dateList.size(); i++) {
+            if (((EnhancedDate) dateList.get(i)).compareTo(min) == -1) {
+                min = ((EnhancedDate) dateList.get(i));
+            }
+            if (((EnhancedDate) dateList.get(i)).compareTo(max) == 1) {
+                max = ((EnhancedDate) dateList.get(i));
+            }
+        }
+
+        for (int i = 0; i < dateList.size(); i++) {
+            for (int j = 0; j < dateList.size(); j++) {
+                if (i != j && ((EnhancedDate) dateList.get(i))
+                        .compareTo(((EnhancedDate) dateList.get(j))) == 0) {
+                    dateList.remove(j);
+                }
+            }
+        }
+
+        Collections.sort(dateList, new Comparator<Date>() {
+            @Override
+            public int compare(Date o1, Date o2) {
+                return ((EnhancedDate) o1).compareTo(o2);
+            }
+        });
+
+        input.close();
+    }
+		/*EnhancedDate enhancedDate = new EnhancedDate();
 		
 		while(true) {
 			System.out.println("chon cac hinh thuc sau");
@@ -99,6 +193,5 @@ public class Main {
 			//v.add(i);
 		}*/
 		
-	}
 
 }

@@ -7,8 +7,7 @@ public class chuong3_bai5 {
 	
 	chuong3_bai5(){
 		JFrame f = new JFrame("JPanel Demo Program");
-		//f.setBounds(250,200,300,300);
-		f.setSize(310,120);
+		f.setSize(305,150);
 		JPanel panel1 = new JPanel();
 		JLabel l1,l2;
 		JTextField t1,t2;
@@ -28,19 +27,17 @@ public class chuong3_bai5 {
 		b.setSize(200,200);
 		
 		
-		//panel1.setLayout(new GridLayout(2,2));
+		panel1.setBorder(BorderFactory.createTitledBorder("Login Panel"));
 		panel1.add(l1);
 		panel1.add(t1);
 		
 		panel1.add(l2);
 		panel1.add(t2);
 		
-		JPanel panel2 = new JPanel();
-		panel2.add(b);
+		panel1.add(b);
 		
 		f.add(panel1);
-		f.add(panel2,"South");
-		//f.setLayout(null);
+		
 		f.setVisible(true);
 		
 	}
