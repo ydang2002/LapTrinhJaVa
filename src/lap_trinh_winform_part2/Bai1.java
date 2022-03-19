@@ -16,6 +16,7 @@ public class Bai1 implements ActionListener {
 		b = new JButton ("Click me");
 		l = new JLabel("Click Count: "+ i);
 		
+		
 		b.setBounds(50,10,95,30);
 		b.addActionListener(this);
 		
@@ -44,4 +45,9 @@ public class Bai1 implements ActionListener {
 
 	
 
+	
+	
+	
+	
+	
 }
