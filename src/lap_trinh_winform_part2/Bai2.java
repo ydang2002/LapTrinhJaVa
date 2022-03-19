@@ -78,7 +78,7 @@ public class Bai2 extends JFrame implements ActionListener {
 	//Hàm tính tổng
 	public void Tong() {
 		
-		if(tf1.getText() != null && !tf1.getText().trim().equals("") || tf2.getText() != null && !tf2.getText().trim().equals("") || tf1.getText() == null || tf2.getText() == null) {
+		if(tf1.getText() != null && !tf1.getText().trim().equals("") || tf2.getText() != null && !tf2.getText().trim().equals("") ) {
 			try {
 				
 				double num = Double.parseDouble(tf1.getText());
@@ -89,7 +89,6 @@ public class Bai2 extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
 			}
 		}
-		
 		
 		
 		result = Double.parseDouble(tf1.getText()) + Double.parseDouble(tf2.getText());
@@ -119,7 +118,11 @@ public class Bai2 extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btTong) {
-			Tong();
+			if(tf1.getText().equals("") || tf2.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+            }else {
+            	Tong();
+            }
 		}
 		if(e.getSource() == btHieu) {
 			Hieu();
