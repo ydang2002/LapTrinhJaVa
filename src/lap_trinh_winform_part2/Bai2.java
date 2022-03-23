@@ -77,52 +77,95 @@ public class Bai2 extends JFrame implements ActionListener {
 	
 	//Hàm tính tổng
 	public void Tong() {
-		
-		if(tf1.getText() != null && !tf1.getText().trim().equals("") || tf2.getText() != null && !tf2.getText().trim().equals("") ) {
+		if(tf1.getText().equals("") || tf2.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+        } else {
 			try {
 				
-				double num = Double.parseDouble(tf1.getText());
-				double number = Double.parseDouble(tf2.getText());
-				
+				double numlb1 = Double.parseDouble(tf1.getText());
+				double numlb2 = Double.parseDouble(tf2.getText());
+				result = numlb1 + numlb2;
+				//Hiển thị kết quả
+			   tf3.setText(String.valueOf(result));
 				
 			}catch (NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
 			}
-		}
+        }	
 		
-		
-		result = Double.parseDouble(tf1.getText()) + Double.parseDouble(tf2.getText());
-			//Hiển thị kết quả
-		   tf3.setText(String.valueOf(result)); 
 	}
+		
+		/*result = Double.parseDouble(tf1.getText()) + Double.parseDouble(tf2.getText());
+			//Hiển thị kết quả
+		   tf3.setText(String.valueOf(result)); */
 	
 	//Hàm tính Hiệu
 	public void Hieu() {
-		result = Double.parseDouble(tf1.getText()) - Double.parseDouble(tf2.getText());
-		tf3.setText(String.valueOf(result));
+		if(tf1.getText().equals("") || tf2.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+        } else {
+			try {
+				
+				double numlb1 = Double.parseDouble(tf1.getText());
+				double numlb2 = Double.parseDouble(tf2.getText());
+				result = numlb1 - numlb2;
+				//Hiển thị kết quả
+			   tf3.setText(String.valueOf(result));
+				
+			}catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
+			}
+        }	
 	}
 	
 	//Hàm tính tích
 	public void Tich() {
-		result = Double.parseDouble(tf1.getText()) * Double.parseDouble(tf2.getText());
-		tf3.setText(String.valueOf(result)); 
+		if(tf1.getText().equals("") || tf2.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+        } else {
+			try {
+				
+				double numlb1 = Double.parseDouble(tf1.getText());
+				double numlb2 = Double.parseDouble(tf2.getText());
+				result = numlb1 * numlb2;
+				//Hiển thị kết quả
+			   tf3.setText(String.valueOf(result));
+				
+			}catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
+			}
+        }	
 	}
 	
 	//Hàm tính thương
 	public void Thuong() {
-		 result = Double.parseDouble(tf1.getText()) / Double.parseDouble(tf2.getText());
-		    tf3.setText(String.valueOf(result));
+		if(tf1.getText().equals("") || tf2.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+        } else {
+			try {
+				
+				double numlb1 = Double.parseDouble(tf1.getText());
+				double numlb2 = Double.parseDouble(tf2.getText());
+				result = numlb1 / numlb2;
+				//Hiển thị kết quả
+			   tf3.setText(String.valueOf(result));
+				
+			}catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
+			}
+        }	
 	}
 	
 	//Xử lí khi người dùng nhấn các nút phép toán
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btTong) {
-			if(tf1.getText().equals("") || tf2.getText().equals("")) {
+			/*if(tf1.getText().equals("") || tf2.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
             }else {
             	Tong();
-            }
+            }*/
+			Tong();
 		}
 		if(e.getSource() == btHieu) {
 			Hieu();
