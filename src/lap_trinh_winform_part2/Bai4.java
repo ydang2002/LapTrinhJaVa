@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class Bai4 extends JPanel implements ActionListener {
 	
+	//Đặt tên cho các JradioButton
 	static String birtString = "Bird";
 	static String catString = "Cat";
 	static String dogString = "Dog";
@@ -21,8 +22,8 @@ public class Bai4 extends JPanel implements ActionListener {
 		
 		
 		bird = new JRadioButton (birtString);
-		bird.setActionCommand(birtString);
-		bird.setSelected(true);
+		bird.setActionCommand(birtString);//dùng cho hàm actionPerformed, khi người dùng click vào button thì chương trình hiểu và hiển thị ảnh
+		bird.setSelected(true);// mặc định khi chạy chương trình thì nút  Bird được chọn
 		
 		cat = new JRadioButton(catString);
 		cat.setActionCommand(catString);
@@ -44,13 +45,14 @@ public class Bai4 extends JPanel implements ActionListener {
 		group.add(rabbit);
 		group.add(pig);
 		
-		// Đăng kí listener cho các nút
+		// Thêm sự kiện cho các Button
 		bird.addActionListener(this);
 		cat.addActionListener(this);
 		dog.addActionListener(this);
 		rabbit.addActionListener(this);
 		pig.addActionListener(this);
 		
+		//Đường dẫn thư mục các ảnh cần hiển thị
 		 picture = new JLabel(createImageIcon("images/"
                  + birtString
                  + ".gif"));
@@ -60,7 +62,7 @@ public class Bai4 extends JPanel implements ActionListener {
 		//kích thước picture
 		picture.setPreferredSize(new Dimension(400, 600));
 		
-		//đạt các nút thành một cột
+		//đặt các nút thành một cột
 		JPanel radioPanel = new JPanel(new GridLayout(0, 1));
 		radioPanel.add(bird);
 		radioPanel.add(cat);
@@ -83,40 +85,41 @@ public class Bai4 extends JPanel implements ActionListener {
 		
 	}
 
+	//Trả về hình ảnh hoặc đường dẫn không hợp lệ
 	protected static ImageIcon createImageIcon(String path) {
         java.net.URL imgURL = RadioButtonDemo.class.getResource(path);
         if (imgURL != null) {
             return new ImageIcon(imgURL);
         } else {
-            System.err.println("Couldn't find file: " + path);
+            System.err.println("Không tìm thấy file: " + path);
             return null;
         }
     }
 	
-	 private static void createAndShowGUI() {
+	 private static void khoiTaoJframe() {
 	        
 	        JFrame frame = new JFrame("RadioButtonDemo");
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	      
 	        JComponent newContentPane = new Bai4();
-	        newContentPane.setOpaque(true); //content panes must be opaque
 	        frame.setContentPane(newContentPane);
 
-	        
-	        frame.pack();
+	        frame.pack();//kích thước cho Jframe
 	        frame.setVisible(true);
 	    }
 
 	public static void main(String[] args) {
 		 javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	            public void run() {
-	                createAndShowGUI();
+	            	khoiTaoJframe();
 	            }
 	        });
 
 	}
 
 	
-
+//https://v1study.com/java-swing-cach-su-dung-button-check-box-va-radio.html
+//https://docs.oracle.com/javase/tutorial/uiswing/examples/components/RadioButtonDemoProject/src/components/RadioButtonDemo.java
+//Phương thức pack () được định nghĩa trong lớp Window trong Java và nó định kích thước khung sao cho tất cả nội dung của nó bằng hoặc cao hơn kích thước ưa thích của chúng.
 }

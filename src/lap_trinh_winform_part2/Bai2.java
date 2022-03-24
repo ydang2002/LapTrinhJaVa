@@ -11,14 +11,13 @@ public class Bai2 extends JFrame implements ActionListener {
 	JTextField tf1, tf2, tf3;
 	//luu ket qua 
 	private double result;
-	//Dùng nhận tầng contentPane của JFrame
-	//Container container;
+	
 	//Nhóm thành phần trên giao diện 
 	JPanel panel1, panel2;
 	
 	
 	public Bai2() {
-		//Tạo các thành phần tren6v giao diện
+		//Tạo các thành phần trên giao diện
 		f = new JFrame("SimpleCalculator");
 		
 		JLabel numlb1, numlb2, Resultlb;
@@ -29,12 +28,13 @@ public class Bai2 extends JFrame implements ActionListener {
 		Resultlb = new JLabel("Result: ");
 		tf3 = new JTextField();
 		//Textfield chứa kết quả không được dùng dữ liệu
+		//Khóa tf3 không cho nhập
 		tf3.setEditable(false);
 		
 		
 			
 		
-		//Panel1 chúa ba textField
+		//Panel1 chứa ba textField
 		panel1 = new JPanel();
 		//Tạo layout gồm 3 hàng 2 cột
 		panel1.setLayout(new GridLayout(3,2));
@@ -53,6 +53,7 @@ public class Bai2 extends JFrame implements ActionListener {
 		btTich = new JButton("*");
 		btThuong = new JButton("/");
 		
+		//Thêm sự kiện cho các Button
 		btTong.addActionListener(this);
 		btHieu.addActionListener(this); 
 		btTich.addActionListener(this); 
@@ -67,7 +68,7 @@ public class Bai2 extends JFrame implements ActionListener {
 		
 		//Đưa 2 Panel1 và Panel2 vào JFrame
 		f.add(panel1);
-		f.add(panel2,"South");
+		f.add(panel2,"South");//"South": Dùng để làm cho các Button được căn vào giữa
 		f.setSize(300,200);
 		//f.setLayout(null);
 		f.setVisible(true);
@@ -77,15 +78,17 @@ public class Bai2 extends JFrame implements ActionListener {
 	
 	//Hàm tính tổng
 	public void Tong() {
+		//Kiểm tra tf1 và tf2 nếu rỗng thì show thông báo ra
 		if(tf1.getText().equals("") || tf2.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
         } else {
-			try {
+			try {//Bắt ngoại lệ nếu nhập vào không phải là số nguyên thì show thông báo ra
 				
+				//dùng đưa từ kiểu String về double
 				double numlb1 = Double.parseDouble(tf1.getText());
 				double numlb2 = Double.parseDouble(tf2.getText());
 				result = numlb1 + numlb2;
-				//Hiển thị kết quả
+				//Hiển thị kết quả trong ô tf3
 			   tf3.setText(String.valueOf(result));
 				
 			}catch (NumberFormatException ex) {

@@ -18,15 +18,15 @@ public class Bai1 implements ActionListener {
 		
 		
 		b.setBounds(50,10,95,30);
-		b.addActionListener(this);
+		b.addActionListener(this);//Thêm sự kiện cho Button: Click me
 		
 		f.add(l);
 		f.add(b);
 		
 		l.setBounds(150,10,95,30);
 		f.setSize(300,200);
-		f.setLayout(null);
-		f.setVisible(true);
+		f.setLayout(null);//không dùng bố cục
+		f.setVisible(true);//Hiển thị Jframe
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
