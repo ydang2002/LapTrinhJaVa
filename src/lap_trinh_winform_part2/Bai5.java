@@ -3,13 +3,14 @@ package lap_trinh_winform_part2;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Bai5 extends JFrame implements  ActionListener{
+public class Bai5  implements  ActionListener{
 	JCheckBox checkBox1, checkBox2, checkBox3, checkBox4;
 	JLabel label;
 	JButton btn;
+	JFrame f;
 	
 		Bai5(){
-			JFrame f = new JFrame("Food Ordering");
+			 f = new JFrame("Food Ordering");
 			
 			label = new JLabel("Menu");
 			label.setBounds(50,20,100,50);
@@ -36,10 +37,7 @@ public class Bai5 extends JFrame implements  ActionListener{
 			f.add(checkBox3);
 			f.add(checkBox4);
 			
-			/*checkBox1.addItemListener(this);
-			checkBox2.addItemListener(this);
-			checkBox3.addItemListener(this);
-			checkBox4.addItemListener(this);*/
+			
 			btn.addActionListener(this);
 			
 			f.setSize(400,450);
@@ -75,7 +73,7 @@ public class Bai5 extends JFrame implements  ActionListener{
 			
 			msg += "--------------------\n";
 			
-			JOptionPane.showMessageDialog(this, msg + "Total: $" + amount);
+			JOptionPane.showMessageDialog(f, msg + "Total: $" + amount);
 			
 		}
 		

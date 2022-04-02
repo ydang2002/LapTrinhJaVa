@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Bai4 extends JPanel implements ActionListener {
+public class Bai4  implements ActionListener {
 	
 	//Đặt tên cho các JradioButton
 	static String birtString = "Bird";
@@ -14,12 +14,11 @@ public class Bai4 extends JPanel implements ActionListener {
 	static String pigString = "Pig";
 	
 	JLabel picture;
-	JFrame f;
+	JFrame frame;
 	JRadioButton bird, cat, dog, rabbit, pig; 
 	
 	public Bai4() {
-		super(new BorderLayout());
-		
+        frame = new JFrame("RadioButtonDemo");
 		
 		bird = new JRadioButton (birtString);
 		bird.setActionCommand(birtString);//dùng cho hàm actionPerformed, khi người dùng click vào button thì chương trình hiểu và hiển thị ảnh
@@ -60,7 +59,7 @@ public class Bai4 extends JPanel implements ActionListener {
 		
 		
 		//kích thước picture
-		picture.setPreferredSize(new Dimension(400, 600));
+		//picture.setPreferredSize(new Dimension(400,600));
 		
 		//đặt các nút thành một cột
 		JPanel radioPanel = new JPanel(new GridLayout(0, 1));
@@ -71,10 +70,13 @@ public class Bai4 extends JPanel implements ActionListener {
 		radioPanel.add(pig);
 		
 		//Đặt vị trí các 
-		add(radioPanel, BorderLayout.LINE_START);
-        add(picture, BorderLayout.CENTER);
-        setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
-      
+		frame.add(radioPanel, BorderLayout.LINE_START);
+		frame.add(picture, BorderLayout.CENTER);
+		//frame.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+		//frame.pack();//kích thước cho Jframe
+		frame.setSize(300,200);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	@Override
@@ -96,7 +98,7 @@ public class Bai4 extends JPanel implements ActionListener {
         }
     }
 	
-	 private static void khoiTaoJframe() {
+	 /*private static void khoiTaoJframe() {
 	        
 	        JFrame frame = new JFrame("RadioButtonDemo");
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,12 +109,13 @@ public class Bai4 extends JPanel implements ActionListener {
 
 	        frame.pack();//kích thước cho Jframe
 	        frame.setVisible(true);
-	    }
+	    }*/
 
 	public static void main(String[] args) {
 		 javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	            public void run() {
-	            	khoiTaoJframe();
+	            	new Bai4();
+	            	//khoiTaoJframe();
 	            }
 	        });
 

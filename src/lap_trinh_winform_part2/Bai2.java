@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt .event. *;
 import java.awt.*;
 
-public class Bai2 extends JFrame implements ActionListener {
+public class Bai2 implements ActionListener {
 	
 	JFrame f;
 	JButton btTong, btHieu, btTich, btThuong;
@@ -68,7 +68,7 @@ public class Bai2 extends JFrame implements ActionListener {
 		
 		//Đưa 2 Panel1 và Panel2 vào JFrame
 		f.add(panel1);
-		f.add(panel2,"South");//"South": Dùng để làm cho các Button được căn vào giữa
+		f.add(panel2,"South");//"South": Dùng để làm cho các Button được căn ở dưới
 		f.setSize(300,200);
 		//f.setLayout(null);
 		f.setVisible(true);
@@ -80,7 +80,7 @@ public class Bai2 extends JFrame implements ActionListener {
 	public void Tong() {
 		//Kiểm tra tf1 và tf2 nếu rỗng thì show thông báo ra
 		if(tf1.getText().equals("") || tf2.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+            JOptionPane.showMessageDialog(f, "Nhập chưa đủ dữ liệu");
         } else {
 			try {//Bắt ngoại lệ nếu nhập vào không phải là số nguyên thì show thông báo ra
 				
@@ -92,7 +92,7 @@ public class Bai2 extends JFrame implements ActionListener {
 			   tf3.setText(String.valueOf(result));
 				
 			}catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
+				JOptionPane.showMessageDialog(f,  "Nhập sai dữ liệu");
 			}
         }	
 		
@@ -105,7 +105,7 @@ public class Bai2 extends JFrame implements ActionListener {
 	//Hàm tính Hiệu
 	public void Hieu() {
 		if(tf1.getText().equals("") || tf2.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+            JOptionPane.showMessageDialog(f, "Nhập chưa đủ dữ liệu");
         } else {
 			try {
 				
@@ -116,7 +116,7 @@ public class Bai2 extends JFrame implements ActionListener {
 			   tf3.setText(String.valueOf(result));
 				
 			}catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
+				JOptionPane.showMessageDialog(f,  "Nhập sai dữ liệu");
 			}
         }	
 	}
@@ -124,7 +124,7 @@ public class Bai2 extends JFrame implements ActionListener {
 	//Hàm tính tích
 	public void Tich() {
 		if(tf1.getText().equals("") || tf2.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+            JOptionPane.showMessageDialog(f, "Nhập chưa đủ dữ liệu");
         } else {
 			try {
 				
@@ -135,7 +135,7 @@ public class Bai2 extends JFrame implements ActionListener {
 			   tf3.setText(String.valueOf(result));
 				
 			}catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
+				JOptionPane.showMessageDialog(f,  "Nhập sai dữ liệu");
 			}
         }	
 	}
@@ -143,7 +143,7 @@ public class Bai2 extends JFrame implements ActionListener {
 	//Hàm tính thương
 	public void Thuong() {
 		if(tf1.getText().equals("") || tf2.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Nhập chưa đủ dữ liệu");
+            JOptionPane.showMessageDialog(f, "Nhập chưa đủ dữ liệu");
         } else {
 			try {
 				
@@ -154,7 +154,7 @@ public class Bai2 extends JFrame implements ActionListener {
 			   tf3.setText(String.valueOf(result));
 				
 			}catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null,  "Nhập sai dữ liệu");
+				JOptionPane.showMessageDialog(f,  "Nhập sai dữ liệu");
 			}
         }	
 	}
