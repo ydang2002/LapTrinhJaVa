@@ -88,8 +88,5 @@ public class Bai2 implements ActionListener  {
 		 new Bai2();
 
 	}
-//https://www.youtube.com/watch?v=wYdJkWVn3CM&ab_channel=KAMLESHUTUBE
-
-	
 
 }
