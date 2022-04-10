@@ -42,21 +42,16 @@ public class Bai1  {
 		
 		jpanel3 = new JPanel();
 		jpanel3.add(sp);
-		//jpanel3.setBounds(100,100,100,200);
-		
+				
 		jPanel2 = new JPanel();
 		jPanel2.add(bt1);
-		jPanel2.add(bt2);
-		//jPanel2.setBounds(100, 200, 300, 400);
-		
-		
+		jPanel2.add(bt2);		
 		
 		f.add(jPanel1,BorderLayout.NORTH);
 		f.add(jPanel2,BorderLayout.SOUTH);
 		f.add(jpanel3,BorderLayout.CENTER);
 		
 		f.setSize(500,300);
-		//f.setLayout(null);
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
