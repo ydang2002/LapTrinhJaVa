@@ -1,7 +1,10 @@
 package KetNoiCSDL_Part1;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+
 
 public class QuanLiSanPham {
 	static Scanner scan = new Scanner(System.in);
@@ -31,7 +34,28 @@ public class QuanLiSanPham {
 		}
 	}
 	
+	static String nMaLoaiSanPham;
 	public void themSP() {
+		ArrayList<String> ds = new ArrayList<String>();
+		do {
+		//ArrayList<String> listMaLoaiSP
+		
+		 ds=layMaLoaiSP();
+		 System.out.println("Moi ban nhap ma loai san pham ");
+		 for (String string : ds) {
+			 System.out.println(string);
+		}
+		 nMaLoaiSanPham = scan.nextLine();
+	        
+	        if(!ds.contains(nMaLoaiSanPham)) {
+	        	System.out.println("Ban da nhap sai ma loai san pham, moi ban nhap lai!!!!!");
+	        }
+		}while(!ds.contains(nMaLoaiSanPham));
+	
+		
+		/*System.out.println("Moi ban nhap ma loai san pham ");
+		String MaLoaiSP = scan.nextLine();*/
+		
 		LoaiSanPham loaiSanPham = new LoaiSanPham();
 		loaiSanPham.input2();
 		SanPham sanPham = new SanPham();
@@ -56,7 +80,7 @@ public class QuanLiSanPham {
 			statement.setString(1, sanPham.getMaSP());
 			statement.setString(2, sanPham.getTenSP());
 			statement.setInt(3, sanPham.getGia());
-			statement.setString(4, sanPham.getMaLoaiSP());
+			statement.setString(4, loaiSanPham.getMaLoaiSP());
 			statement.execute();
 			
 			} catch (Exception e) {
@@ -150,5 +174,66 @@ public class QuanLiSanPham {
 				System.out.println("Kết nối thất bại");
 			}
 	}
+	
+	public static ArrayList<String> layMaLoaiSP(){
+		ArrayList<String> listMaLoaiSP = new ArrayList<>();
+		
+		
+			try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
+			String user="root";
+			String password="12345678";
+			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
+			Statement stmt=connection.createStatement();
+			ResultSet rs = stmt.executeQuery("select MaLoaiSP from loaisanpham  ");
+	
+			while(rs.next())
+            {
+				String maLoaiSP = new String(rs.getString("MaLoaiSP"));               
+                listMaLoaiSP.add(maLoaiSP);
+            }
+				
+			} catch (Exception e) {
+				System.out.println(e);
+				System.out.println("Kết nối thất bại");
+			}
+			
+			return listMaLoaiSP;
+	}
+	
+	/*public static ArrayList<String> layMaLoaiSP(){
+		ArrayList<String> listMaLoaiSP = new ArrayList<String>();
+		
+		do {
+			try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
+			String user="root";
+			String password="12345678";
+			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
+			Statement stmt=connection.createStatement();
+			ResultSet rs = stmt.executeQuery("select MaLoaiSP from loaisanpham  ");
+	
+			while(rs.next())
+            {
+				String maLoaiSP = new String(rs.getString("MaLoaiSP"));               
+                listMaLoaiSP.add(maLoaiSP);
+            }
+				
+			} catch (Exception e) {
+				System.out.println(e);
+				System.out.println("Kết nối thất bại");
+			}
+			
+			
+			//System.out.println("Nhap ma loai san pham(Loại 1: 1BC00, Loai 2: 2BC00) ");
+			nMaLoaiSanPham = scan.nextLine();
+	        
+	        if(!listMaLoaiSP.contains(nMaLoaiSanPham)) {
+	        	System.out.println("Ban da nhap sai ma loai san pham, moi ban nhap lai!!!!!");
+	        }
+		}while(!listMaLoaiSP.contains(nMaLoaiSanPham));
+	}*/
 	
 }

@@ -66,8 +66,8 @@ public class SanPham {
 		System.out.println("Nhap ten san pham");
 		tenSP = scan.nextLine();
 		
-		System.out.println("Nhap ma loai san pham");
-		maLoaiSP = scan.nextLine();
+		/*System.out.println("Nhap ma loai san pham");
+		maLoaiSP = scan.nextLine();*/
 		
 		System.out.println("Nhap gia tien");
 		gia = scan.nextInt();

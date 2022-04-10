@@ -30,3 +30,9 @@ insert into LoaiSanPham values('2BC01','Loai 2')
 
 -- select MaSP, TenSP, Gia, TenLoaiSP from SanPham, LoaiSanPham where SanPham.MaLoaiSP = LoaiSanPham.MaLoaiSP
 select * from SanPham
+select * from loaisanpham l 
+select MaLoaiSP from loaisanpham  
+
+
+-- select MaSP, TenSP, Gia, TenLoaiSP from SanPham sp, LoaiSanPham lsp where sp.MaLoaiSP = lsp.MaLoaiSP and sp.MaLoaiSP = '1BC01'
+

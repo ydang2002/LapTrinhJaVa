@@ -45,8 +45,8 @@ public class LoaiSanPham {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Nhap ten loai san pham: ");
 		tenLoaiSP = scan.nextLine();
-		System.out.println("Nhap ma loai san pham");
-		maLoaiSP = scan.nextLine();
+		/*System.out.println("Nhap ma loai san pham");
+		maLoaiSP = scan.nextLine();*/
 	}
 
 }
