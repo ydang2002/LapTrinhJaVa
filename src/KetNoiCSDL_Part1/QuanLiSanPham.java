@@ -37,9 +37,7 @@ public class QuanLiSanPham {
 	static String nMaLoaiSanPham;
 	public void themSP() {
 		ArrayList<String> ds = new ArrayList<String>();
-		do {
-		//ArrayList<String> listMaLoaiSP
-		
+		do {	
 		 ds=layMaLoaiSP();
 		 System.out.println("Moi ban nhap ma loai san pham ");
 		 for (String string : ds) {
@@ -56,8 +54,8 @@ public class QuanLiSanPham {
 		/*System.out.println("Moi ban nhap ma loai san pham ");
 		String MaLoaiSP = scan.nextLine();*/
 		
-		LoaiSanPham loaiSanPham = new LoaiSanPham();
-		loaiSanPham.input2();
+		/*LoaiSanPham loaiSanPham = new LoaiSanPham();
+		loaiSanPham.input2();*/
 		SanPham sanPham = new SanPham();
 		sanPham.input();
 		PreparedStatement statement = null;
@@ -69,18 +67,12 @@ public class QuanLiSanPham {
 			String user="root";
 			String password="12345678";
 			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
-			String sql = ("insert into LoaiSanPham (MaLoaiSP, TenLoaiSP) VALUES (?, ?)");
-			statement = connection.prepareCall(sql);
-			statement.setString(1, loaiSanPham.getMaLoaiSP());
-			statement.setString(2, loaiSanPham.getTenLoaiSP());
-			statement.execute();
-			//insert into sanpham values('BC03','Thuoc ke',5000,'3BC01')
 			String sql2 = ("insert into sanpham (MaSP, TenSP, Gia, MaLoaiSP) VALUES (?, ?, ?, ?)");
 			statement = connection.prepareCall(sql2);
 			statement.setString(1, sanPham.getMaSP());
 			statement.setString(2, sanPham.getTenSP());
 			statement.setInt(3, sanPham.getGia());
-			statement.setString(4, loaiSanPham.getMaLoaiSP());
+			statement.setString(4, nMaLoaiSanPham);
 			statement.execute();
 			
 			} catch (Exception e) {
