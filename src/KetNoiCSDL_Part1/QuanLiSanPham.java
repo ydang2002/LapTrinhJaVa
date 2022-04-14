@@ -8,16 +8,14 @@ import java.util.Scanner;
 
 public class QuanLiSanPham {
 	static Scanner scan = new Scanner(System.in);
+	Connection connection = null;
+	PreparedStatement statement = null;
 
 	public  void hienThiDanhSachSP() {
 		//Các bước cần làm để lấy dữ liệu trong CSDL ra & hiển thị
         
         try {
-        	Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
-			String user="root";
-			String password="12345678";
-			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
+        	ketNoisql();
 			Statement stmt=connection.createStatement();
 			ResultSet rs = stmt.executeQuery("select MaSP, TenSP, Gia, TenLoaiSP from SanPham, LoaiSanPham where SanPham.MaLoaiSP = LoaiSanPham.MaLoaiSP");
 			//System.out.println("Kết nối thành công");
@@ -36,9 +34,10 @@ public class QuanLiSanPham {
 	
 	static String nMaLoaiSanPham;
 	public void themSP() {
+		QuanLiLoaiSanPham quanLiLoaiSanPham = new QuanLiLoaiSanPham();
 		ArrayList<String> ds = new ArrayList<String>();
 		do {	
-		 ds=layMaLoaiSP();
+		 ds=quanLiLoaiSanPham.layMaLoaiSP();
 		 System.out.println("Moi ban nhap ma loai san pham ");
 		 for (String string : ds) {
 			 System.out.println(string);
@@ -51,22 +50,11 @@ public class QuanLiSanPham {
 		}while(!ds.contains(nMaLoaiSanPham));
 	
 		
-		/*System.out.println("Moi ban nhap ma loai san pham ");
-		String MaLoaiSP = scan.nextLine();*/
-		
-		/*LoaiSanPham loaiSanPham = new LoaiSanPham();
-		loaiSanPham.input2();*/
 		SanPham sanPham = new SanPham();
 		sanPham.input();
-		PreparedStatement statement = null;
-		
-		
+	
 		try {
-        	Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
-			String user="root";
-			String password="12345678";
-			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
+			ketNoisql();
 			String sql2 = ("insert into sanpham (MaSP, TenSP, Gia, MaLoaiSP) VALUES (?, ?, ?, ?)");
 			statement = connection.prepareCall(sql2);
 			statement.setString(1, sanPham.getMaSP());
@@ -82,31 +70,17 @@ public class QuanLiSanPham {
 		}
 	
 	public  void suaSP() {
-		System.out.println("Sua thong tin san pham theo ma loai san pham");
-		LoaiSanPham loaiSanPham = new LoaiSanPham();
-		loaiSanPham.input2();
+		System.out.println("Sua thong tin san pham theo ma san pham");
 		SanPham sanPham = new SanPham();
 		sanPham.input();
-		PreparedStatement statement = null;
 		
 		try {
-        	Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
-			String user="root";
-			String password="12345678";
-			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
-			String sql = ("update LoaiSanPham set TenLoaiSP = ? " + "where MaLoaiSP = ?");
-			statement = connection.prepareCall(sql);
-			statement.setString(1, loaiSanPham.getMaLoaiSP());
-			statement.setString(2, loaiSanPham.getTenLoaiSP());
-			statement.execute();
-			//insert into sanpham values('BC03','Thuoc ke',5000,'3BC01')
-			String sql2 = ("update sanpham set MaSP = ? , TenSP = ?, Gia = ? " + "where MaLoaiSP = ?");
+  			ketNoisql();
+			String sql2 = ("update sanpham set TenSP = ?, Gia = ? " + "where MaSP = ?");
 			statement = connection.prepareCall(sql2);
-			statement.setString(1, sanPham.getMaSP());
-			statement.setString(2, sanPham.getTenSP());
-			statement.setInt(3, sanPham.getGia());
-			statement.setString(4, sanPham.getMaLoaiSP());
+			statement.setString(1, sanPham.getTenSP());
+			statement.setInt(2, sanPham.getGia());
+			statement.setString(3, sanPham.getMaSP());
 			statement.execute();
 			
 			} catch (Exception e) {
@@ -116,23 +90,13 @@ public class QuanLiSanPham {
 	}
 	
 	public  void xoaSP() {
-		System.out.println("Nhap ma loai san pham can xoa: ");
-        String MaLoaiSP = scan.nextLine();
-		PreparedStatement statement = null;
+		System.out.println("Nhap ma san pham can xoa: ");
+        String MaSP = scan.nextLine();
 		try {
-        	Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
-			String user="root";
-			String password="12345678";
-			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
-			String sql = ("delete from LoaiSanPham where MaLoaiSP = ?");
-			statement = connection.prepareCall(sql);
-			statement.setString(1,MaLoaiSP );
-			statement.execute();
-			//insert into sanpham values('BC03','Thuoc ke',5000,'3BC01')
-			String sql2 = ("delete from sanpham where MaLoaiSP = ?");
+			ketNoisql();
+			String sql2 = ("delete from sanpham where MaSP = ?");
 			statement = connection.prepareCall(sql2);
-			statement.setString(1, MaLoaiSP);
+			statement.setString(1, MaSP);
 			statement.execute();
 			
 			} catch (Exception e) {
@@ -144,13 +108,8 @@ public class QuanLiSanPham {
 	public  void timSp() {
 		System.out.println("Nhap ma loai san pham can Tim: ");
         String MaLoaiSP = scan.nextLine();
-		PreparedStatement statement = null;
 		try {
-        	Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
-			String user="root";
-			String password="12345678";
-			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
+			ketNoisql();
 			String sql = ("select MaSP, TenSP, Gia, TenLoaiSP from SanPham sp, LoaiSanPham lsp where sp.MaLoaiSP = lsp.MaLoaiSP and sp.MaLoaiSP = ? ");
 			statement = connection.prepareStatement(sql);
 			statement.setString(1,MaLoaiSP );
@@ -167,65 +126,12 @@ public class QuanLiSanPham {
 			}
 	}
 	
-	public static ArrayList<String> layMaLoaiSP(){
-		ArrayList<String> listMaLoaiSP = new ArrayList<>();
-		
-		
-			try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
-			String user="root";
-			String password="12345678";
-			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
-			Statement stmt=connection.createStatement();
-			ResultSet rs = stmt.executeQuery("select MaLoaiSP from loaisanpham  ");
-	
-			while(rs.next())
-            {
-				String maLoaiSP = new String(rs.getString("MaLoaiSP"));               
-                listMaLoaiSP.add(maLoaiSP);
-            }
-				
-			} catch (Exception e) {
-				System.out.println(e);
-				System.out.println("Kết nối thất bại");
-			}
-			
-			return listMaLoaiSP;
+	public void ketNoisql() throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
+		String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
+		String user="root";
+		String password="12345678";
+		 connection=(Connection) DriverManager.getConnection(url, user, password);
 	}
-	
-	/*public static ArrayList<String> layMaLoaiSP(){
-		ArrayList<String> listMaLoaiSP = new ArrayList<String>();
-		
-		do {
-			try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://Localhost:3306/QuanLiSanPham";
-			String user="root";
-			String password="12345678";
-			Connection connection=(Connection) DriverManager.getConnection(url, user, password);
-			Statement stmt=connection.createStatement();
-			ResultSet rs = stmt.executeQuery("select MaLoaiSP from loaisanpham  ");
-	
-			while(rs.next())
-            {
-				String maLoaiSP = new String(rs.getString("MaLoaiSP"));               
-                listMaLoaiSP.add(maLoaiSP);
-            }
-				
-			} catch (Exception e) {
-				System.out.println(e);
-				System.out.println("Kết nối thất bại");
-			}
-			
-			
-			//System.out.println("Nhap ma loai san pham(Loại 1: 1BC00, Loai 2: 2BC00) ");
-			nMaLoaiSanPham = scan.nextLine();
-	        
-	        if(!listMaLoaiSP.contains(nMaLoaiSanPham)) {
-	        	System.out.println("Ban da nhap sai ma loai san pham, moi ban nhap lai!!!!!");
-	        }
-		}while(!listMaLoaiSP.contains(nMaLoaiSanPham));
-	}*/
 	
 }

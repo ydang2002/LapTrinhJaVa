@@ -16,7 +16,6 @@ import javax.swing.JButton;
 public class test extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -39,25 +38,23 @@ public class test extends JFrame {
 	 */
 	public test() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 752, 599);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"M\u00E3 H\u1ECDc Sinh", "T\u00EAn H\u1ECDc Sinh", "M\u00E3 Gi\u1EA3ng Vi\u00EAn", "T\u00EAn Gi\u1EA3ng Vi\u00EAn"}));
-		comboBox.setBounds(25, 24, 95, 21);
-		contentPane.add(comboBox);
+		JPanel panel = new JPanel();
+		panel.setBounds(42, 38, 632, 66);
+		contentPane.add(panel);
 		
-		textField = new JTextField();
-		textField.setBounds(153, 25, 96, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(42, 114, 632, 33);
+		contentPane.add(panel_1);
 		
-		JButton btnNewButton = new JButton("T\u00ECm");
-		btnNewButton.setBounds(275, 24, 85, 21);
-		contentPane.add(btnNewButton);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(112, 241, 616, 311);
+		contentPane.add(panel_2);
 	}
 }

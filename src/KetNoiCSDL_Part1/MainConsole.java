@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 //import java.sql.*;
 
-public class Main {
+public class MainConsole {
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class Main {
 			}
 			
 			
-		}while(choose != 5);
+		}while(choose != 6);
 
 	}
 	
