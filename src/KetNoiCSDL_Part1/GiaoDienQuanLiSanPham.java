@@ -123,6 +123,10 @@ public class GiaoDienQuanLiSanPham extends JFrame {
 			 public void actionPerformed(ActionEvent evt) {
 				 btXoaActionPerformed(evt); }});
 		 
+		 btTimKiem.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent evt) {
+				 btTimKiemActionPerformed(evt); }});
+		 
 		 btThoat.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent evt) {
 			 btnThoatActionPerformed(evt); }});
@@ -140,7 +144,7 @@ public class GiaoDienQuanLiSanPham extends JFrame {
 			tfMaSP.setText(model.getValueAt(i, 0).toString());
 			tfTenSP.setText(model.getValueAt(i, 1).toString());
 			tfGia.setText(model.getValueAt(i, 2).toString());
-			cbMaLoaiSP.setSelectedItem(model.getValueAt(i, 3).toString());//xem lại setToolTipText
+			//cbMaLoaiSP.setSelectedItem(model.getValueAt(i, 3).toString());//xem lại setToolTipText
 			}
 		}
 	
@@ -236,6 +240,40 @@ private void btHienThiActionPerformed(ActionEvent evt) {
 		loadData();
 	}
 	
+	private void btTimKiemActionPerformed(ActionEvent evt) {
+		int i=jTable1.getSelectedRow();
+		String MaSP = JOptionPane.showInputDialog(this, "Nhập của mã sản phẩm muốn tìm", "MSSV", JOptionPane.OK_OPTION);
+		try {
+			connection = (Connection) DriverManager.getConnection(url, user, password);
+			String sql = ("select MaSP, TenSP, Gia, TenLoaiSP from SanPham, LoaiSanPham where MaSP = ?");
+			statement = connection.prepareStatement(sql);
+			rs = statement.executeQuery();
+			//statement.setString(1, MaSP);
+			
+			
+			ResultSetMetaData stData = (ResultSetMetaData) rs.getMetaData();
+			q = stData.getColumnCount();
+			
+			DefaultTableModel recordTable = (DefaultTableModel)jTable1.getModel();
+			recordTable.setRowCount(0);
+			
+			while(rs.next()) {
+				Vector<String> columnData = new Vector<String>();
+				for(int j=1; j <= q; j++) {
+					columnData.add(rs.getString(1));
+					columnData.add(rs.getString(2));
+					columnData.add(Integer.toString(rs.getInt(3)));
+					columnData.add(MaSP);
+				}
+				recordTable.addRow(columnData);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		//loadData();
+	
+	}
+	
 	private void btnThoatActionPerformed (ActionEvent evt) {
 		System.exit(0);
 		}
@@ -281,7 +319,14 @@ private void btHienThiActionPerformed(ActionEvent evt) {
 		new GiaoDienQuanLiSanPham();
 
 	}
-	
+	/*else {
+	for(String ds: dsMSHS) {
+		if(ds != tfMSHS.getText()) {
+			JOptionPane.showMessageDialog(this, "không tồn tại mã học sinh");
+			break;
+		}
+	}
+}*/
 	
 
 }
